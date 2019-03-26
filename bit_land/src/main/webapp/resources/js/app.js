@@ -8,15 +8,15 @@ app =(()=>{
      };
      var setContentView =()=>{
     	 $.when(
-    				$.getScript($.js()+'/component/compo.js'),
-    				$.getScript($.js()+'/customer/cust.js'),
-    				$.getScript($.js()+'/employee/emp.js')
-    			).done(()=>{
-    				cust.permission.login();   				
-  				
-    			});
+				$.getScript($.js()+'/component/compo.js'),
+				$.getScript($.js()+'/customer/cust.js'),
+				$.getScript($.js()+'/employee/emp.js'),
+				$.getScript($.js()+'/common/auth.js')
+			).done(()=>{
+				auth.permission.login();   					
+			});
      };
-     return {init:init, onCreate: onCreate};
+     return {init:init, onCreate:onCreate};
 })();
 
 

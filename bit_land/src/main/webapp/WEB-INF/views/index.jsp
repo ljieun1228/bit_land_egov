@@ -35,7 +35,6 @@
       .row.content {height: auto;} 
     }
   </style>
- </style>
 </head>
 <body>
 <div id="wrapper">
@@ -131,6 +130,7 @@
 <script src="<%=application.getContextPath()%>/resources/js/component/compo.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/employee/emp.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/customer/cust.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/common/auth.js"></script>
 <script>
 app.init('<%=application.getContextPath()%>');
 </script>	

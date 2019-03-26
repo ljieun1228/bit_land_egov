@@ -19,7 +19,7 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
-
+	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 	<context:component-scan
