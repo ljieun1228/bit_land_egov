@@ -39,20 +39,21 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<context:property-placeholder location="classpath:config/database.properties"/>
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName"
-			value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/bit" />
-		<property name="username" value="bit" />
-		<property name="password" value="bit" />
+		
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean> 
 	
 	<bean id="sqlSessionFactoryBean"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- <property name="mapperLocations"
-			value="classpath:com/bit_etland/web/mapper/*Mapper.xml" /> -->
+		 <property name="mapperLocations"
+			value="classpath:com/bit_land/web/**/*Mapper.xml" /> 
 	</bean>
 	
 	<bean id="sqlSession"
@@ -60,7 +61,7 @@
 		<constructor-arg ref="sqlSessionFactoryBean" />
 	</bean>
 	
-	<!-- <mybatis-spring:scan
-		base-package="com.bit_etland.web.mapper" /> -->
+ <mybatis-spring:scan
+		base-package="com.bit_land.web" /> 
 </beans>
 		

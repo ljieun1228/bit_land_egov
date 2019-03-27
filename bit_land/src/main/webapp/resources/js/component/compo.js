@@ -1,10 +1,10 @@
 var compo = compo || {}
 compo = {
 		cust_login_form : ()=>{
-		return '<h2>Login Form</h2>'
+		return '<h2>로그인</h2>'
 		+'<form>'
 		+'  <div class="imgcontainer">'
-		+'    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">'
+		+'    <img src="https://pbs.twimg.com/profile_images/896409586558574593/3PfL51iO_400x400.jpg" alt="Avatar" class="avatar">'
 		+'  </div>'
 		
 		+'  <div class="container">'
@@ -28,7 +28,7 @@ compo = {
 		cust_join_form : ()=>{
 		return 	'<form action="/action_page.php" style="border:1px solid #ccc">'
 		+'<div class="container">'
-		+'<h1>Sign Up</h1>'
+		+'<h2>회원가입</h2>'
 		+'<p>Please fill in this form to create an account.</p>'
 		+'<hr>'
 		
@@ -56,7 +56,7 @@ compo = {
 		emp_join_form : ()=>{
 		return 	'<form action="/action_page.php" style="border:1px solid #ccc">'
 		+'<div class="container">'
-		+'<h1>Sign Up</h1>'
+		+'<h2>사원등록</h2>'
 		+'<p>Please fill in this form to create an account.</p>'
 		+'<hr>'
 		
@@ -80,6 +80,30 @@ compo = {
 		+'</div>'
 	    +'</div>'
 		+'</form>'},
+		
+		emp_login_form : ()=>{
+			return '<h2>사원접속</h2>'
+			+'<form>'
+			+'  <div class="imgcontainer">'
+			+'    <img src="https://pbs.twimg.com/profile_images/896409586558574593/3PfL51iO_400x400.jpg" alt="Avatar" class="avatar">'
+			+'  </div>'
+			
+			+'  <div class="container">'
+			+'    <label for="uname"><b>Username</b></label><br>'
+			+'    <input type="text" placeholder="Enter Username" name="uname" "required"><br>'
+			+'    <label for="psw"><b>Password</b></label><br>'
+			+'    <input type="password" placeholder="Enter Password" name="psw" "required"><br>'
+			+'    <button type="submit">Login</button><br>'
+			+'    <label>'
+			+'      <input type="checkbox" checked="checked" name="remember"> "Remember me"'
+			+'    </label>'
+			+'  </div>'
+			
+			+'  <div class="container" style="background-color:#f1f1f1">'
+			+'    <button type="button" class="cancelbtn">Cancel</button>'
+			+'    <span class="psw">Forgot <a href="#">password?</a></span>'
+			+'  </div>'
+			+'</form>'},
 			
 
 	}

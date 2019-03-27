@@ -41,7 +41,7 @@
 <div id="container" class="container-fluid">
   <div id="full_content" class="row content">
     <div id="left_content" class="col-sm-3 sidenav">
-      <h4>John's Blog</h4>
+      <h4>BIT LAND</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Home</a></li>
         <li><a href="#section2">Friends</a></li>
@@ -90,7 +90,7 @@
 		      
 		      <div class="row">
 		        <div class="col-sm-2 text-center">
-		          <img src="bandmember.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+		          <img src="https://pbs.twimg.com/profile_images/896409586558574593/3PfL51iO_400x400.jpg" class="img-circle" height="65" width="65" alt="Avatar">
 		        </div>
 		        <div class="col-sm-10">
 		          <h4>Anja <small>Sep 29, 2015, 9:12 PM</small></h4>
@@ -98,7 +98,7 @@
 		          <br>
 		        </div>
 		        <div class="col-sm-2 text-center">
-		          <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+		          <img src="https://pbs.twimg.com/profile_images/896409586558574593/3PfL51iO_400x400.jpg" class="img-circle" height="65" width="65" alt="Avatar">
 		        </div>
 		        <div class="col-sm-10">
 		          <h4>John Row <small>Sep 25, 2015, 8:25 PM</small></h4>
@@ -107,7 +107,7 @@
 		          <p><span class="badge">1</span> Comment:</p><br>
 		          <div class="row">
 		            <div class="col-sm-2 text-center">
-		              <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+		              <img src="https://pbs.twimg.com/profile_images/896409586558574593/3PfL51iO_400x400.jpg" class="img-circle" height="65" width="65" alt="Avatar">
 		            </div>
 		            <div class="col-xs-10">
 		              <h4>Nested Bro <small>Sep 25, 2015, 8:28 PM</small></h4>

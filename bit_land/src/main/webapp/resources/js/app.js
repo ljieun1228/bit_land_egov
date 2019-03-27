@@ -13,7 +13,7 @@ app =(()=>{
 				$.getScript($.js()+'/employee/emp.js'),
 				$.getScript($.js()+'/common/auth.js')
 			).done(()=>{
-				auth.permission.login();   					
+				 auth.init();			
 			});
      };
      return {init:init, onCreate:onCreate};
