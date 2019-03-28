@@ -16,8 +16,11 @@
 	        	   SSN ssn,
 	        	   PHONE phone
 			FROM CUSTOMERS 
-		    WHERE CUST_ID LIKE #{customerId}
-		    	AND CUST_PW LIKE #{customerPw}
+	 	WHERE CUST_ID LIKE #{customerId}
+
+	<if test="customerPw != null">
+        AND CUST_PW LIKE #{customerPw}
+	</if>
 	</select>
 	
 	<insert
