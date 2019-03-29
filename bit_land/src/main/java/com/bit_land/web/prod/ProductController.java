@@ -24,7 +24,7 @@ public class ProductController {
 	@Autowired Product prod;
 	@Autowired	Map<String, Object> map;
 	
-	//Insert
+	//Insert//
 		@PostMapping("/products")
 		public Map<?, ?> creat(@RequestBody Product param) {
 			logger.info("Welcome home! empController=register");
