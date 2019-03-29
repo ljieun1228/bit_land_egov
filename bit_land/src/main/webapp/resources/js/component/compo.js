@@ -107,7 +107,7 @@ compo = {
                 +'<div class="w3-third">'
                   +'<div class="w3-white w3-text-grey w3-card-4">'
                     +'<div class="w3-display-container">'
-                      +'<img src="/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar">'
+                      +'<img src="https://www.w3schools.com/w3images/team1.jpg" style="width:100%" alt="Avatar">'
                       +'<div class="w3-display-bottomleft w3-container w3-text-black">'
                         +'<h2>Jane Doe</h2>'
                       +'</div>'
@@ -215,7 +215,114 @@ compo = {
               +'<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>'
             +'</footer>'
             +'</div>'
-	}
+		},
+		
+		
+		/* https://www.w3schools.com/bootstrap/bootstrap_carousel.asp */
+		cust_carousel : ()=>{
+			return 	'<div class="container">'
+			+'  <h2>SHOP</h2>'
+			+'  <div id="myCarousel" class="carousel slide" data-ride="carousel">'
+			+'    <!-- Indicators -->'
+			+'    <ol class="carousel-indicators">'
+			+'      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>'
+			+'      <li data-target="#myCarousel" data-slide-to="1"></li>'
+			+'      <li data-target="#myCarousel" data-slide-to="2"></li>'
+			+'    </ol>'
+
+			+'    <!-- Wrapper for slides -->'
+			+'    <div class="carousel-inner">'
+
+			+'      <div class="item active">'
+			+'        <img src="https://www.w3schools.com/bootstrap/la.jpg" alt="Los Angeles" style="width:100%;">'
+			+'        <div class="carousel-caption">'
+			+'          <h3>Los Angeles</h3>'
+			+'          <p>LA is always so much fun!</p>'
+			+'        </div>'
+			+'      </div>'
+
+			+'      <div class="item">'
+			+'        <img src="https://www.w3schools.com/bootstrap/chicago.jpg" alt="Chicago" style="width:100%;">'
+			+'        <div class="carousel-caption">'
+			+'          <h3>Chicago</h3>'
+			+'          <p>Thank you, Chicago!</p>'
+			+'        </div>'
+			+'      </div>'
+			    
+			+'      <div class="item">'
+			+'        <img src="https://www.w3schools.com/bootstrap/ny.jpg" alt="New York" style="width:100%;">'
+			+'        <div class="carousel-caption">'
+			+'          <h3>New York</h3>'
+			+'          <p>We love the Big Apple!</p>'
+			+'        </div>'
+			+'      </div>'
+			  
+			+'    </div>'
+
+			+'    <!-- Left and right controls -->'
+			+'    <a class="left carousel-control" href="#myCarousel" data-slide="prev">'
+			+'      <span class="glyphicon glyphicon-chevron-left"></span>'
+			+'      <span class="sr-only">Previous</span>'
+			+'    </a>'
+			+'    <a class="right carousel-control" href="#myCarousel" data-slide="next">'
+			+'      <span class="glyphicon glyphicon-chevron-right"></span>'
+			+'      <span class="sr-only">Next</span>'
+			+'    </a>'
+			+'  </div>'
+			+'    <br>'
+			+'    <br>'
+			+'</div>'
+		},
+		
+		//https://www.w3schools.com/bootstrap/bootstrap_forms_inputs.asp
+		//https://jqueryui.com/datepicker/
+		prd_post : ()=>{
+			return '<div class="form-group">'
+			+'  <label for="productName">상품명:</label>'
+			+'  <input type="text" class="form-control" id="productName">'
+			+'</div>'
+			+'<div class="form-group">'
+			+'  <label for="price">가격:</label>'
+			+'  <input type="text" class="form-control" id="pwd">'
+			+'</div>'
+
+			+'<h3>색상</h3>'
+			+'<label class="checkbox-inline"><input type="checkbox" value="">black</label>'
+			+'<label class="checkbox-inline"><input type="checkbox" value="">white</label>'
+			+'<label class="checkbox-inline"><input type="checkbox" value="">blue</label>'
+
+			+'<div class="radio">'
+			+'  <label><input type="radio" name="optradio" checked>삼성전자</label>'
+			+'</div>'
+			+'<div class="radio">'
+			+'  <label><input type="radio" name="optradio">Option 2</label>'
+			+'</div>'
+			+'<div class="radio disabled">'
+			+'  <label><input type="radio" name="optradio" disabled>Option 3</label>'
+			+'</div>'
+
+			+'<div class="form-group">'
+			+'  <label for="sel1">용량 </label>'
+			+'  <select class="form-control" id="sel1">'
+			+'    <option>1</option>'
+			+'    <option>2</option>'
+			+'    <option>3</option>'
+			+'    <option>4</option>'
+			+'  </select>'
+			+'</div>'
+
+			//+' $( "#datepicker" ).datepicker();'
+			+'<p>Date: <input type="text" id="datepicker"></p>'
+
+			+'<div class="form-group">'
+			+'  <label for="comment">상세설명:</label>'
+			+'  <textarea class="form-control" rows="5" id="comment"></textarea>'
+			+'</div>'
+
+			//+'<a href="#" data-toggle="tooltip" title="Hooray!"> </a>'
+
+		
+		}
 }		
 		
 		

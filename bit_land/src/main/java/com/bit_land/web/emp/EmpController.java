@@ -7,20 +7,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bit_land.web.cmm.IConsumer;
 import com.bit_land.web.cmm.IFunction;
 import com.bit_land.web.cmm.PrintService;
-import com.bit_land.web.cmm.Users;
+import com.bit_land.web.cust.Customer;
 
 @RestController
-@RequestMapping("/emps")
 public class EmpController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EmpController.class);
@@ -31,7 +30,7 @@ public class EmpController {
 	@Autowired	Map<String, Object> map;
 
 	//사원 가입
-	@PostMapping("/register")
+	@PostMapping("/emps")
 	public Map<?, ?> register(@RequestBody Employee param) {
 		logger.info("Welcome home! empController=register");
 		IConsumer i = (Object o) -> empMap.insertEmployee(param);
@@ -42,7 +41,7 @@ public class EmpController {
 	}
 
 	//사원 로그인
-	@PostMapping("/access/{empId}")
+	@PostMapping("/emps/{empId}")
 	public Employee access(@PathVariable String userid, @RequestBody Employee param) {
 		logger.info("Welcome home! empController=login");
 		IFunction i = (Object o) -> empMap.selectEmployee(param);
@@ -51,15 +50,15 @@ public class EmpController {
 
 	//사원 리스트
 	@SuppressWarnings("unchecked")
-	@PostMapping("/list")
-	public List<Users<?>> list(@PathVariable String user, @RequestBody Map<?, ?> param) {
+	@GetMapping("/emps")
+	public List<Customer> list(@PathVariable String user, @RequestBody Map<?, ?> param) {
 		logger.info("Welcome home! empController=list");
 		IFunction i = (Object o) -> empMap.selectEmployees(param);
-		return (List<Users<?>>) i.apply(param);
+		return (List<Customer>) i.apply(param);
 	}
 
 	//사원 업데이트
-	@PutMapping("/update")
+	@PutMapping("/emps")
 	public Map<?, ?> update(@PathVariable String user, @PathVariable String userid, @RequestBody Employee param) {
 		logger.info("Welcome home! empController=update");
 		IConsumer i = (Object o) -> empMap.updateEmployee(param);
@@ -70,7 +69,7 @@ public class EmpController {
 	}
 
 	//사원 딜리트
-	@DeleteMapping("/delete")
+	@DeleteMapping("/emps")
 	public Map<?, ?> delete(@PathVariable String user, @PathVariable String userid, @RequestBody Employee param) {
 		logger.info("Welcome home! empController=delete");
 		IConsumer i = (Object o) -> empMap.deleteEmployee(param);

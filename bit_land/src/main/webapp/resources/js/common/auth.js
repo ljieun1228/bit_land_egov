@@ -8,6 +8,7 @@ auth =(()=>{
 		_=$.ctx();
 		js=$.js();
 		compojs = js +'/component/compo.js';
+		custjs = js +'/customer/cust.js';
 		r_cnt = '#right_content';
 		l_cnt = '#left_content';
 		onCreat();	
@@ -29,12 +30,13 @@ auth =(()=>{
 			
 			$(l_cnt + ' ul.nav').empty();
 			
-		let arr = [
-			{name: 'cusLogin', txt: '[user] 로그인'},
-			{name: 'cusJoin', txt: '[user]  가입'},
-			{name: 'empLogin', txt: '[employee] 로그인'},
-			{name: 'empJoin', txt: '[employee] 가입'},
+		let nav = [
+			{name: 'cusLogin', txt: '[사용자] 로그인'},
+			{name: 'cusJoin', txt: '[사용자]  가입'},
+			{name: 'empLogin', txt: '[사원] 로그인'},
+			{name: 'empJoin', txt: '[사원] 가입'},
 			];
+		
 		
 		let joinco =[
 			{labelfor:'ID' ,txt:'ID' , name:'customerId'},
@@ -58,13 +60,16 @@ auth =(()=>{
 			{labelfor:'postnotesalCode' ,txt:'NOTES' , name:'notes'},
 			];
 		
-		$.each(arr,(i,j)=>{
+		$.each(nav,(i,j)=>{
 			$('<li><a href="#">'+j.txt+'</a></li>')
 			.attr('name',j.name)
+			.attr('id',j.name)
 			.appendTo(l_cnt+' ul')
 			.click(function(e){
 				e.preventDefault();
-				let that = $(this).attr('name')//attr 속성값 추가.
+				let that = $(this).attr('name')//attr 속성값 추가. 클릭 시 색 바뀌기 
+				$(this).addClass('active');
+				$(this).siblings().removeClass('active'); 
 				
 				switch(that){
 				case 'cusLogin':
@@ -138,8 +143,9 @@ auth =(()=>{
 					   photo:$("form input[name=photo]").val()
 					};
 			
+			//유저 가입 ajax
 			$.ajax({
-				url:_+'/users/join', 
+				url:_+'/customers', 
 				type:'POST',
 				data:JSON.stringify(data),
 				dataType:'json',
@@ -173,8 +179,9 @@ auth =(()=>{
 					customerPw:$("form input[name=psw]").val()};
 			alert(data.customerId+"  .."+data.customerPw);
 			
+			//유저 로그인 ajax
 			$.ajax({
-				url: _+'/users/login'+data.customerId,
+				url: _+'/customers/'+data.customerId,
 				type: 'POST',
 				data: JSON.stringify(data),
 				dataType: 'json',
@@ -183,8 +190,9 @@ auth =(()=>{
 				success: d =>{
 					if (d.customerId!=='') {
 						alert('로그인 성공'+d.customerId);
-						//$(r_cnt).html(compo.cust_mypage());
-						cust.init();
+						
+						$.getScript(custjs,()=>{cust.init();});
+						//.fail(()=>{})
 					} else {
 						alert('로그인 실패');
 					}
@@ -207,8 +215,9 @@ auth =(()=>{
 					notes:$("form input[name=notes]").val()
 					};
 			
+			//사원 가입 ajax
 			$.ajax({
-				url:_+'/emps/register', 
+				url:_+'/emps', 
 				type:'POST',
 				data:JSON.stringify(data),
 				dataType:'json',
@@ -239,8 +248,10 @@ auth =(()=>{
 		let data ={employeeId:$("form input[name=employeeId]").val(),
 				manager:$("form input[name=manager]").val(),
 				};
+		
+		//사원 로그인 ajax
 		$.ajax({
-			url:_+'/emps/access/'+ data.employeeId, 
+			url:_+'/emps/'+ data.employeeId, 
 			type:'POST',
 			data:JSON.stringify(data),
 			dataType:'json',
