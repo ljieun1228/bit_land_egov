@@ -16,7 +16,7 @@ pro =(()=>{
 	};
 	let setContentView =()=>{
 		$(r_cnt).empty();
-		$(compo.prd_post())
+		$(compo.cust_carousel())
 		.appendTo(r_cnt);
 	};	
 	
