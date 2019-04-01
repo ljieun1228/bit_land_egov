@@ -5,13 +5,15 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.bit_land.web.cmm.Proxy;
+
 @Repository 
 public interface CustomerMapper {
 
 	public void insertCustomer(Customer cus);
 	
-	public List<Customer> selectCustomerList(Map<?,?> m);
-	public List<Customer> selectCustomers(Map<?,?> m);
+	public List<Customer> selectCustomerList(Proxy pxy);
+	public List<Customer> selectCustomers();
 	public Customer selectCustomer(Customer cus);
 	public Customer selectCustomerOne(Customer cus);
 	public Map<String, Object> selectProfile(Map<?,?> m);

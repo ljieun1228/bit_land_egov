@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bit_land.web.emp.EmployeeMapper">
+
+	<select 
+		id="findOneEmployee" 
+		resultType="com.bit_land.web.emp.Employee">
+			SELECT EMPLOYEE_ID employeeId, NAME
+			FROM EMPLOYEES 
+	 </select>
+	<!-- 
+	<insert
+	  id="insertCustomer"
+	  parameterType="com.bit_land.web.cust.Customer"
+	  flushCache="true"
+	  statementType="PREPARED"
+	  timeout="20">
+        INSERT INTO CUSTOMERS (CUST_ID, CUSTOMER_NAME, CUST_PW, 
+        					   ADDRESS, CITY, POSTAL_CODE, SSN, 
+        					   GENDER, PHONE, PHOTO) 
+        VALUES (#{customerId}, #{customerName},#{customerPw}, 
+       			#{address}, #{city}, #{postalCode}, #{ssn}, 
+       			#{gender}, #{phone}, #{photo})
+	</insert>
+  	
+	<update
+		id="updateCustomer"
+		parameterType="com.bit_land.web.cust.Customer"
+		flushCache="true"
+		statementType="PREPARED"
+		timeout="20">
+		UPDATE CUSTOMERS 
+		SET CUSTOMER_NAME = #{customerName},
+	        ADDRESS = #{address},
+	        CITY = #{city}, 
+	        POSTAL_CODE = #{postalCode}, 
+	        PHONE =  #{phone},
+			CUST_PW = #{customerPw}
+		WHERE CUST_ID =  #{customerId};
+	
+ 	</update>
+
+	<delete
+	  	id="deleteCustomer"
+	 	parameterType="com.bit_land.web.cust.Customer"
+	  	flushCache="true"
+	  	statementType="PREPARED"
+	  	timeout="20">  
+        DELETE FROM CUSTOMERS 
+        WHERE CUST_ID LIKE #{customerId}
+	</delete> -->
+    
+</mapper>

@@ -13,8 +13,6 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script>$( "#datepicker" ).datepicker();</script>
-  
   
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */

@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bit_land.web.cmm.IConsumer;
 import com.bit_land.web.cmm.IFunction;
+import com.bit_land.web.cmm.ISupplier;
 import com.bit_land.web.cmm.PrintService;
+import com.bit_land.web.cmm.Proxy;
 
 @RestController
 public class CustController {
@@ -27,6 +29,7 @@ public class CustController {
 	@Autowired	PrintService ps;
 	@Autowired	CustomerMapper custMap;
 	@Autowired	Map<String, Object> map;
+	@Autowired  Proxy pxy;
 
 	//유저 가입
 	@PostMapping("/customers")
@@ -53,12 +56,20 @@ public class CustController {
 	//유저 리스트
 	@SuppressWarnings("unchecked")
 	@GetMapping("/customers/page/{page}")
-	public List<Customer> list(@PathVariable String page, @RequestBody Map<?, ?> param) {
+	public List<Customer> list(@PathVariable String page) {
 		logger.info("Welcome home! CustController=list");
-		IFunction i = (Object o) -> custMap.selectCustomers(param);
-		List<Customer> ls = (List<Customer>) i.apply(param);
+		map.clear();
+		map.put("page_num", "1");
+		map.put("page_size", "5");
+		map.put("block_Size", "5");
+		map.put("total_count", "10");
+		pxy.carryOut(map);
+		IFunction  i = (Object o) ->  custMap.selectCustomers();
+		List<Customer> ls = (List<Customer>) i.apply(pxy);
+		
 		return ls;
 	}
+
 
 	//유저 업데이트
 	@PutMapping("/customers/{userId}")

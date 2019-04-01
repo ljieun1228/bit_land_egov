@@ -19,7 +19,8 @@ pro =(()=>{
 		$(compo.cust_carousel())
 		.appendTo(r_cnt);
 	};	
-	
+	//cust_carousel
+	//cust_mypage
 	/*let post=()=>{
 		//1. Create(Insert : POST)  
 		$.ajax({

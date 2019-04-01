@@ -23,6 +23,21 @@
 	</if>
 	</select>
 	
+	<select 
+		id="selectCustomers" 
+		resultType="com.bit_land.web.cust.Customer">
+			SELECT CUST_ID customerId, 
+				   CUSTOMER_NAME customerName, 
+				   CUST_PW customerPw, 
+	        	   ADDRESS address, 
+	        	   CITY city, 
+	        	   POSTAL_CODE postalCode,
+	        	   SSN ssn,
+	        	   PHONE phone
+			FROM CUSTOMERS 
+	</select>
+	
+	
 	<insert
 	  id="insertCustomer"
 	  parameterType="com.bit_land.web.cust.Customer"

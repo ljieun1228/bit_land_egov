@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bit_land.web.cmm.IConsumer;
 import com.bit_land.web.cmm.IFunction;
+import com.bit_land.web.cmm.ISupplier;
 import com.bit_land.web.cmm.PrintService;
 import com.bit_land.web.cust.Customer;
 
@@ -40,21 +41,12 @@ public class EmpController {
 		return map;
 	}
 
-	//사원 로그인
-	@PostMapping("/emps/{empId}")
-	public Employee access(@PathVariable String userid, @RequestBody Employee param) {
-		logger.info("Welcome home! empController=login");
-		IFunction i = (Object o) -> empMap.selectEmployee(param);
-		return (Employee) i.apply(param);
-	}
-
 	//사원 리스트
-	@SuppressWarnings("unchecked")
 	@GetMapping("/emps")
-	public List<Customer> list(@PathVariable String user, @RequestBody Map<?, ?> param) {
+	public Employee login() {
 		logger.info("Welcome home! empController=list");
-		IFunction i = (Object o) -> empMap.selectEmployees(param);
-		return (List<Customer>) i.apply(param);
+		ISupplier i =  () -> empMap.findOneEmployee();
+		return  (Employee) i.get();
 	}
 
 	//사원 업데이트

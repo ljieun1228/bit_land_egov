@@ -11,6 +11,7 @@ cust =(()=>{
 		projs = js +'/product/pro.js';
 		onCreat();
 	};
+		
 	let onCreat =()=>{
 		setContentView();
 	};
@@ -21,7 +22,7 @@ cust =(()=>{
 		
 		let custnav = [
 			{name: 'mypage', txt: '마이페이지'},
-			{name: 'modify ', txt: '정보수정'},
+			{name: 'modify', txt: '정보수정'},
 			{name: 'custdelete', txt: '회원탈퇴'},
 			{name: 'shop', txt: '쇼핑몰'},
 			{name: 'details', txt: '구매내역'},
@@ -42,10 +43,8 @@ cust =(()=>{
 				
 				switch(that){
 				case 'mypage':
-					alert("마이페이지 들어옴");
 					$(r_cnt).empty();
-					$(compo.cust_mypage())
-					.appendTo(r_cnt);
+					$(compo.cust_mypage()).appendTo(r_cnt);
 					$('form button[type=submit]').click(e=>{
 						e.preventDefault();
 						login();
@@ -53,42 +52,15 @@ cust =(()=>{
 					break;
 					
 				case 'modify':
-					/*$(r_cnt).empty();
-					$(compo.cust_join_form()).appendTo(r_cnt);
-					
-					$('form label').remove();
-					$('form input').remove();
-					
-					$.each(joinco,(i,j)=>{
-						$('#start').append('<br><label for="'+j.labelfor+'"><b>'+j.txt+'</b></label><br>'+
-								'<input type="text" name="'+j.name+'" value="6" required><br>');
-					})
-					.fail(()=>{
-						alert('/component/compo.js를 찾지 못했습니다.');
-					});
-					
-					$('form button[class=signupbtn]').click(e=>{
+					$(r_cnt).empty();
+					$(compo.prd_post()).appendTo(r_cnt);
+					$('form button[type=submit]').click(e=>{
 						e.preventDefault();
-						join();
-					});*/
+					});
 					break;
 					
 				case 'custdelete':
-					/*$(r_cnt).empty();
-					$(compo.emp_join_form()).appendTo(r_cnt);
-					$('form label').remove();
-					$('form input').remove();
-					$.each(registerco,(i,j)=>{
-						$('#start').append('<br><label for="'+j.labelfor+'"><b>'+j.txt+'</b></label><br>'+
-								'<input type="text" name="'+j.name+'" value="6" required><br>');
-					})
-					.fail(()=>{
-						alert('/component/compo.js를 찾지 못했습니다.');
-					});
-					$('form button[class=signupbtn]').click(e=>{
-						e.preventDefault();
-						join();
-					});*/
+					
 					break;
 					
 				case 'shop':
@@ -99,6 +71,27 @@ cust =(()=>{
 			});	
 		})
 	};
-	return {init:init};
+	
+	let list =()=>{
+	
+		$.getJSON($.ctx()+'/customers/page/1',d=>{
+			
+			$('#right_content').html(compo.cust_list());
+		
+			$.each(d,(i,j)=>{
+				$('#custcontent').append('<tr>'
+						+'        <td>'+i+'</td>'
+						+'        <td>'+j.customerId+'</td>'
+						+'        <td>'+j.customerName+'</td>'
+						+'        <td>'+j.address+'</td>'
+						+'        <td>'+j.city+'</td>'
+						+'        <td>'+j.postalCode+'</td>'
+						+'        <td>'+j.phone+'</td>'
+						+'      </tr>');
+			});
+		});
+	};
+				
+	return {init:init, list:list};
 })();
 

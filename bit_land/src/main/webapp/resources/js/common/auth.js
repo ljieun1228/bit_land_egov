@@ -116,6 +116,11 @@ auth =(()=>{
 				case 'empLogin':
 					$(r_cnt).empty();
 					$(compo.emp_login_form()).appendTo(r_cnt);
+					$('form button[id=access_btn]').click(e=>{
+						e.preventDefault();
+						
+						access();
+					});
 					break;
 			 	    }
 				});
@@ -245,35 +250,46 @@ auth =(()=>{
 	
 	//사원 로그인
 	let access =()=>{
-		let data ={employeeId:$("form input[name=employeeId]").val(),
-				manager:$("form input[name=manager]").val(),
-				};
-		
-		//사원 로그인 ajax
-		$.ajax({
-			url:_+'/emps/'+ data.employeeId, 
-			type:'POST',
-			data:JSON.stringify(data),
-			dataType:'json',
-			contentType:'application/json',
-			
-			success: d =>{
-				alert('회원가입 성공!'+d.msg);
-				$(r_cnt).html(compo.emp_login_form());
-				$('form button[type=submit]').click(e=>{
-					e.preventDefault();
-					login();
-				});
-			},
-			error: e =>{
-				alert('회원가입 실패!');
-				$(r_cnt).html(compo.cust_join_form());
-				$('form button[type=submit]').click(e=>{
-					e.preventDefault();
-					login();
-				});
-			 }
-		});
+		let ok = confirm('관리자 입니까?');
+		if(ok){
+			let emp_no = prompt('사원번호를 입력하세요.');
+			$.getJSON(_+'/emps', d => {
+
+				if(emp_no === d.employeeId){
+					
+					$("#emplogin").empty();
+					
+					$('<label for="name"><b>이름</b></label><br>'
+							+'<input id = "empname" type="text" name="name" "required" value ="이지은"><br>'
+							+'<br><button type="submit" id="access_btn">Login</button><br>'
+							+'<label>'
+						)
+					.appendTo("#emplogin");
+					
+					alert('사원입니다. 사원이름을 입력하세요.');
+					
+					let data ={name:$("form input[name=name]").val()}
+					
+					$('form button[id=access_btn]')
+					.click(e=>{
+						e.preventDefault();
+						if(data.name === d.name){ //고객 명단
+							$.getScript(custjs,()=>{
+								cust.list();
+							});
+							
+						}else{
+							alert("사원 이름이 일치하지 않습니다.");
+						}
+					});
+					
+				}else{
+					alert("사원 번호가 일치하지 않습니다.");
+				}
+			});
+		}
+		alert("사원 전용 페이지 입니다. ");
+		//되돌아가기 버튼이 보인다 . 
 	};
 	return {init:init};
 })();

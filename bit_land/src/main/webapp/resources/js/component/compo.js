@@ -1,5 +1,8 @@
 var compo = compo || {}
 compo = {
+		
+		
+		//
 		cust_login_form : ()=>{
 		return '<h2>사용자 로그인</h2>'
 		+'<form>'
@@ -52,18 +55,14 @@ compo = {
 		emp_login_form : ()=>{
 			return '<h2>사원 로그인</h2>'
 			+'<form>'
-			+'  <div class="container">'
-			+'    <label for="uname"><b>Username</b></label><br>'
-			+'    <input type="text" placeholder="Enter Username" name="uname" "required"><br>'
-			+'    <label for="psw"><b>Password</b></label><br>'
-			+'    <input type="password" placeholder="Enter Password" name="psw" "required"><br>'
-			+'    <button type="submit">Login</button><br>'
+			+'  <div id="emplogin" class="container">'
+			
+			+'    <button type="submit" id="access_btn">Login</button><br>'
 			+'    <label>'
 			+'      <input type="checkbox" checked="checked" name="remember"> "Remember me"'
 			+'    </label>'
 			+'  </div>'
-			
-			+'  <div class="container" style="background-color:#f1f1f1">'
+			+'  <div class="container2" style="background-color:#f1f1f1">'
 			+'    <button type="button" class="cancelbtn">Cancel</button>'
 			+'    <span class="psw">Forgot <a href="#">password?</a></span>'
 			+'  </div>'
@@ -275,7 +274,8 @@ compo = {
 		//https://www.w3schools.com/bootstrap/bootstrap_forms_inputs.asp
 		//https://jqueryui.com/datepicker/
 		prd_post : ()=>{
-			return '<div class="form-group">'
+			return  '<div class="form-group">'
+			+'<h2>상품 등록</h2><br>'
 			+'  <label for="productName">상품명:</label>'
 			+'  <input type="text" class="form-control" id="productName">'
 			+'</div>'
@@ -284,7 +284,7 @@ compo = {
 			+'  <input type="text" class="form-control" id="pwd">'
 			+'</div>'
 
-			+'<h3>색상</h3>'
+			+'<h4>색상:</h4>'
 			+'<label class="checkbox-inline"><input type="checkbox" value="">black</label>'
 			+'<label class="checkbox-inline"><input type="checkbox" value="">white</label>'
 			+'<label class="checkbox-inline"><input type="checkbox" value="">blue</label>'
@@ -318,10 +318,28 @@ compo = {
 			+'</div>'
 
 			//+'<a href="#" data-toggle="tooltip" title="Hooray!"> </a>'
-
+		},
 		
+		
+		cust_list : ()=>{
+			return '<div class="container">'
+			+'  <h2>사용자 리스트 </h2>'
+			+'  <table class="table table-striped">'
+			+'    <thead>'
+			+'      <tr>'
+			+'        <th>No</th>'
+			+'        <th>ID</th>'
+			+'        <th>name</th>'
+			+'        <th>address</th>'
+			+'        <th>city</th>'
+			+'        <th>postalCode</th>'
+			+'        <th>phone</th>'
+			+'      </tr>'
+			+'    </thead>'
+			+'    <tbody id="custcontent">'
+     
+			+'    </tbody>'
+			+'  </table>'
+			+'</div>'
 		}
-}		
-		
-		
-	
+}
