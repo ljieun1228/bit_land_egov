@@ -1,4 +1,78 @@
-var ctx = "${ctx}";
+var emp = emp || {};
+
+emp =(()=>{
+	let init =()=>{
+		onCreat();
+		
+	};
+	let onCreat =()=>{
+		$.when(
+				
+		)
+		.done(()=>{
+			setContentView();
+			
+		});
+
+		
+	};
+	let setContentView =()=>{
+		
+	};
+	let empNavi =()=>{
+		
+	$('#navi_content').empty();	
+		
+		let empco = [
+			{name: 'cusList', txt: '고객 목록'},
+			{name: 'proRegist', txt: '상품 등록'},
+			{name: 'proList', txt: '상품 목록'},
+			{name: 'proModify', txt: '상품 수정'},
+			{name: 'proDelete', txt: '상품 삭제'},
+			{name: 'proStats', txt: '상품 통계'},
+			];
+		
+		$.each(empco,(i,j)=>{
+			$('<li><a href="#">'+j.txt+'</a></li>')
+			.attr('name',j.name)
+			.attr('id',j.name)
+			.appendTo('#left_content'+' ul')
+			
+			.click(function(e){
+				e.preventDefault();
+				let that = $(this).attr('name')
+				$(this).addClass('active');
+				$(this).siblings().removeClass('active'); 
+				
+				switch(that){
+				case 'proRegist' :
+					$('#right_content').empty();
+					$(compo.prod_post()).appendTo('#right_content')
+					.css({
+					    'background-color': '#f1f1f1'
+					});
+				}
+			})
+		});
+	};
+	
+	return {init:init, empNavi:empNavi};
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*var ctx = "${ctx}";
 $('.page').click(()=>{
 	location.assign(
 			ctx + '/customer.do?cmd=cust_list&page=list&page_num='+$(this).text());
@@ -60,4 +134,4 @@ $('#cate_search').click(()=>{
 	            +'      </div>'
 	            +'    </div>'
 	            +'</form>');
-	});
+	});*/

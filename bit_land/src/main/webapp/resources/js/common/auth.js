@@ -19,7 +19,6 @@ auth =(()=>{
 	let setContentView=()=>{
 		
 			$.getScript(compojs, ()=>{
-			
 			$(r_cnt).html(compo.cust_login_form());
 			
 			$('form button[type=submit]')
@@ -27,17 +26,8 @@ auth =(()=>{
 				e.preventDefault();
 				login();
 			});
-			
 			$(l_cnt + ' ul.nav').empty();
-			
-		let nav = [
-			{name: 'cusLogin', txt: '[사용자] 로그인'},
-			{name: 'cusJoin', txt: '[사용자]  가입'},
-			{name: 'empLogin', txt: '[사원] 로그인'},
-			{name: 'empJoin', txt: '[사원] 가입'},
-			];
-		
-		
+						
 		let joinco =[
 			{labelfor:'ID' ,txt:'ID' , name:'customerId'},
 			{labelfor:'name' ,txt:'NAME' , name:'customerName'},
@@ -60,14 +50,14 @@ auth =(()=>{
 			{labelfor:'postnotesalCode' ,txt:'NOTES' , name:'notes'},
 			];
 		
-		$.each(nav,(i,j)=>{
+		$.each(navi(),(i,j)=>{
 			$('<li><a href="#">'+j.txt+'</a></li>')
 			.attr('name',j.name)
 			.attr('id',j.name)
 			.appendTo(l_cnt+' ul')
 			.click(function(e){
 				e.preventDefault();
-				let that = $(this).attr('name')//attr 속성값 추가. 클릭 시 색 바뀌기 
+				let that = $(this).attr('name')// attr 속성값 추가. 클릭 시 색 바뀌기
 				$(this).addClass('active');
 				$(this).siblings().removeClass('active'); 
 				
@@ -118,11 +108,10 @@ auth =(()=>{
 					$(compo.emp_login_form()).appendTo(r_cnt);
 					$('form button[id=access_btn]').click(e=>{
 						e.preventDefault();
-						
 						access();
 					});
 					break;
-			 	    }
+			 	    };
 				});
 			});
 		})
@@ -131,7 +120,7 @@ auth =(()=>{
 		});
 	};
 	
-	//유저 가입
+	// 유저 가입
 	let join =()=>{
 
 		$("form button[type=submit]").click(e=>{
@@ -148,7 +137,7 @@ auth =(()=>{
 					   photo:$("form input[name=photo]").val()
 					};
 			
-			//유저 가입 ajax
+			// 유저 가입 ajax
 			$.ajax({
 				url:_+'/customers', 
 				type:'POST',
@@ -176,7 +165,16 @@ auth =(()=>{
 		});
 	};
 	
-	//유저 로그인
+	// 기본 네비 
+	let navi = ()=>{
+		return [
+		{name: 'cusLogin', txt: '[사용자] 로그인'},
+		{name: 'cusJoin', txt: '[사용자]  가입'},
+		{name: 'empLogin', txt: '[사원] 로그인'},
+		{name: 'empJoin', txt: '[사원] 가입'},]; 
+		};
+	
+	// 유저 로그인
 	let login =()=>{
 				$("form button[type=submit]").click( e=>{
 					e.preventDefault();
@@ -184,7 +182,7 @@ auth =(()=>{
 					customerPw:$("form input[name=psw]").val()};
 			alert(data.customerId+"  .."+data.customerPw);
 			
-			//유저 로그인 ajax
+			// 유저 로그인 ajax
 			$.ajax({
 				url: _+'/customers/'+data.customerId,
 				type: 'POST',
@@ -197,7 +195,7 @@ auth =(()=>{
 						alert('로그인 성공'+d.customerId);
 						
 						$.getScript(custjs,()=>{cust.init();});
-						//.fail(()=>{})
+						// .fail(()=>{})
 					} else {
 						alert('로그인 실패');
 					}
@@ -207,7 +205,7 @@ auth =(()=>{
 		});
 	};		
 	
-	//사원 가입
+	// 사원 가입
 	let register =()=>{
 
 		$("form button[type=submit]").click(e=>{
@@ -220,7 +218,7 @@ auth =(()=>{
 					notes:$("form input[name=notes]").val()
 					};
 			
-			//사원 가입 ajax
+			// 사원 가입 ajax
 			$.ajax({
 				url:_+'/emps', 
 				type:'POST',
@@ -248,7 +246,7 @@ auth =(()=>{
 		});
 	};
 	
-	//사원 로그인
+	// 사원 로그인
 	let access =()=>{
 		let ok = confirm('관리자 입니까?');
 		if(ok){
@@ -273,23 +271,24 @@ auth =(()=>{
 					$('form button[id=access_btn]')
 					.click(e=>{
 						e.preventDefault();
-						if(data.name === d.name){ //고객 명단
+						if(data.name === d.name){ // 고객 명단
 							$.getScript(custjs,()=>{
 								cust.list();
+								emp.empNavi();
+								
 							});
 							
 						}else{
 							alert("사원 이름이 일치하지 않습니다.");
 						}
 					});
-					
 				}else{
 					alert("사원 번호가 일치하지 않습니다.");
 				}
 			});
 		}
 		alert("사원 전용 페이지 입니다. ");
-		//되돌아가기 버튼이 보인다 . 
+		// 되돌아가기 버튼이 보인다 .
 	};
 	return {init:init};
 })();

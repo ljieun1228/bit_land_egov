@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/w3.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -47,7 +48,7 @@
   <div id="full_content" class="row content">
     <div id="left_content" class="col-sm-3 sidenav">
       <h4>BIT LAND</h4>
-      <ul class="nav nav-pills nav-stacked">
+      <ul id="navi_content" class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Home</a></li>
         <li><a href="#section2">Friends</a></li>
         <li><a href="#section3">Family</a></li>

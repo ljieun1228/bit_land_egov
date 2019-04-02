@@ -1,9 +1,10 @@
 var cust = cust || {}
 
 cust =(()=>{
+	
+	
 	let js,projs,l_cnt,r_cnt;
-	
-	
+		
 	let init =()=>{
 		l_cnt = '#left_content';
 		r_cnt = '#right_content';
@@ -60,7 +61,6 @@ cust =(()=>{
 					break;
 					
 				case 'custdelete':
-					
 					break;
 					
 				case 'shop':
@@ -78,18 +78,40 @@ cust =(()=>{
 			
 			$('#right_content').html(compo.cust_list());
 		
-			$.each(d,(i,j)=>{
+			$.each(d.ls,(i,j)=>{
 				$('#custcontent').append('<tr>'
-						+'        <td>'+i+'</td>'
-						+'        <td>'+j.customerId+'</td>'
-						+'        <td>'+j.customerName+'</td>'
-						+'        <td>'+j.address+'</td>'
-						+'        <td>'+j.city+'</td>'
-						+'        <td>'+j.postalCode+'</td>'
-						+'        <td>'+j.phone+'</td>'
-						+'      </tr>');
+						+'<td>'+j.rownum+'</td>'
+						+'<td>'+j.customerId+'</td>'
+						+'<td>'+j.customerName+'</td>'
+						+'<td>남</td>'
+						+'<td>'+j.address+'</td>'
+						+'<td>'+j.city+'</td>'
+						+'<td>'+j.postalCode+'</td>'
+						+'<td>'+j.phone+'</td>'
+						+'</tr>');
 			});
+			
+			html = '<div class="pagination">';
+			
+			
+			if(d.pxy.existPrev){
+				html += '<li><a href="${ctx}/customer.do?cmd=cust_list&page=list&page_num=${d.pxy.prevBlock}">&laquo;</a></li>';
+			}
+			let i = 0;
+			for(i=1;i<6;i++){
+				if(d.pxy.pageNum == i){
+					html += '<li><a href="#" class="page active">'+i+'</a></li>';
+				}else{
+					html += '<li><a href="#" class="page">'+i+'</a></li>';
+				}
+			}
+			if(d.pxy.existNext){
+				html += '<li><a href="${ctx}/customer.do?cmd=cust_list&page=list&page_num=${d.pxy.nextBlock}" >&raquo;</a></li>';
+			}
+			$('#cuslist').append(html);
 		});
+		
+		
 	};
 				
 	return {init:init, list:list};

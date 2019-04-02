@@ -1,6 +1,5 @@
 package com.bit_land.web.emp;
 
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -15,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bit_land.web.cmm.IConsumer;
-import com.bit_land.web.cmm.IFunction;
 import com.bit_land.web.cmm.ISupplier;
 import com.bit_land.web.cmm.PrintService;
-import com.bit_land.web.cust.Customer;
 
 @RestController
 public class EmpController {

@@ -36,10 +36,10 @@ public class Proxy {
         System.out.println("총페이지 수:" + pageCount);
 
         startRow = (pageNum - 1) * pageSize + 1;
-        System.out.println("스타트 로우:" + startRow);
+        System.out.println("startRow:" + startRow);
 
         endRow = (totalCount > pageNum * pageSize) ? pageNum * pageSize : totalCount;
-        System.out.println("END로우:" + endRow);
+        System.out.println("endRow:" + endRow);
 
         int blocknum = (pageNum - 1) / blockSize;
         endpage = startpage + (blockSize - 1);
@@ -55,7 +55,7 @@ public class Proxy {
        }
 
         existPrev = (startpage - pageSize) > 0;
-        existNext = (startpage + pageSize) <= pageCount;
+        existNext = (startpage + pageSize) >= pageCount;
         prevBlock = startpage - pageSize;
         nextBlock = startpage + pageSize;
 

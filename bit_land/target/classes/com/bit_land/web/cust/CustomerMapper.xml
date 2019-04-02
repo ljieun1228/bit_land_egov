@@ -4,20 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bit_land.web.cust.CustomerMapper">
 
-	<select 
-		id="selectCustomer" 
-		resultType="com.bit_land.web.cust.Customer">
-			SELECT CUST_ID customerId, 
-				   CUSTOMER_NAME customerName, 
-				   CUST_PW customerPw, 
-	        	   ADDRESS address, 
-	        	   CITY city, 
-	        	   POSTAL_CODE postalCode,
-	        	   SSN ssn,
-	        	   PHONE phone
-			FROM CUSTOMERS 
-	 	WHERE CUST_ID LIKE #{customerId}
+<resultMap id="result" type="hashmap">
+  <id property="customerId" column="CUST_ID" />
+  <result property="customerPw" column="CUST_PW"/>
+  <result property="customerName" column="CUSTOMER_NAME"/>
+  <result property="address" column="ADDRESS"/>
+  <result property="city" column="CITY"/>
+  <result property="postalCode" column="POSTAL_CODE"/>
+  <result property="ssn" column="SSN"/>
+  <result property="phone" column="PHONE"/>
+  <result property="gender" column="GENDER"/>
+  <result property="photo" column="PHOTO"/>
+  <result property="rownum" column="ROWNUM"/>
+</resultMap>
 
+ <select 
+		id="selectCustomer" 
+		resultMap="result">
+		SELECT C.*
+		FROM CUSTOMERS C
+	 	WHERE CUST_ID LIKE #{customerId}
 	<if test="customerPw != null">
         AND CUST_PW LIKE #{customerPw}
 	</if>
@@ -25,19 +31,14 @@
 	
 	<select 
 		id="selectCustomers" 
-		resultType="com.bit_land.web.cust.Customer">
-			SELECT CUST_ID customerId, 
-				   CUSTOMER_NAME customerName, 
-				   CUST_PW customerPw, 
-	        	   ADDRESS address, 
-	        	   CITY city, 
-	        	   POSTAL_CODE postalCode,
-	        	   SSN ssn,
-	        	   PHONE phone
-			FROM CUSTOMERS 
+		resultMap="result"
+		parameterType="com.bit_land.web.cmm.Proxy">
+		SELECT @ROWNUM:=@ROWNUM+1 AS ROWNUM, C.*
+	    FROM CUSTOMERS C, (SELECT @ROWNUM:=0)TMP
+	    ORDER BY ROWNUM DESC
+	    LIMIT #{startRow}, #{pageSize}
 	</select>
-	
-	
+		
 	<insert
 	  id="insertCustomer"
 	  parameterType="com.bit_land.web.cust.Customer"

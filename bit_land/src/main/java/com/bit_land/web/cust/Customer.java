@@ -8,6 +8,15 @@ import lombok.Data;
 @Data @Component @Lazy
 public class Customer {
 
-	private String rnum, customerId, customerPw, customerName, address, city, postalCode, ssn, phone, gender, photo;
+	private String customerId, 
+	customerPw, 
+	customerName, 
+	address, 
+	city, 
+	postalCode, 
+	ssn, 
+	phone, 
+	gender, 
+	photo;
 
 }
