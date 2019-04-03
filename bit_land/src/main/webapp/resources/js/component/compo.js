@@ -271,59 +271,43 @@ compo = {
 			+'</div>'
 		},
 		
+		//	private String rnum, productId, productName, supplierId, categoryId, unit, price;
+
+		
 		prod_post :()=>{
 			return '<div class="col-md-8 order-md-1">'
 			+'          <h2 class="mb-3">상품 등록</h2>'
 			+'          <form class="needs-validation" novalidate="">'
 			+'            <div class="row">'
 			+'              <div class="col-md-6 mb-3">'
-			+'                <label for="firstName">First name</label>'
-			+'                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">'
+			+'                <label for="firstName">카테고리</label>'
+			+'                <input type="text" class="form-control" id="firstName" placeholder="" value="스마트폰" required="">'
 			+'                <div class="invalid-feedback">'
-			+'                  Valid first name is required.'
 			+'                </div>'
 			+'              </div>'
 			+'              <div class="col-md-6 mb-3">'
-			+'                <label for="lastName">Last name</label>'
+			+'                <label for="lastName">상품명</label>'
 			+'                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">'
 			+'                <div class="invalid-feedback">'
-			+'                  Valid last name is required.'
 			+'                </div>'
 			+'              </div>'
 			+'            </div>'
 
 			+'            <div class="mb-3">'
-			+'              <label for="username">Username</label>'
+			+'              <label for="username">공급업체<label>'
 			+'              <div class="input-group">'
-			+'                <div class="input-group-prepend">'
-			+'                  <span class="input-group-text">@</span>'
-			+'                </div>'
-			+'                <input type="text" class="form-control" id="username" placeholder="Username" required="">'
+			+'                <input type="text" class="form-control" id="supplierId" placeholder="supplierId" value="samsung" required="">'
 			+'                <div class="invalid-feedback" style="width: 100%;">'
-			+'                  Your username is required.'
 			+'                </div>'
 			+'              </div>'
 			+'            </div>'
 
 			+'            <div class="mb-3">'
-			+'              <label for="email">Email <span class="text-muted">(Optional)</span></label>'
+			+'              <label for="email">가격 <span class="text-muted">(Optional)</span></label>'
 			+'              <input type="email" class="form-control" id="email" placeholder="you@example.com">'
 			+'              <div class="invalid-feedback">'
 			+'                Please enter a valid email address for shipping updates.'
 			+'              </div>'
-			+'            </div>'
-
-			+'            <div class="mb-3">'
-			+'              <label for="address">Address</label>'
-			+'              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">'
-			+'              <div class="invalid-feedback">'
-			+'                Please enter your shipping address.'
-			+'              </div>'
-			+'            </div>'
-
-			+'            <div class="mb-3">'
-			+'              <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>'
-			+'              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">'
 			+'            </div>'
 
 			+'            <div class="row">'
@@ -366,7 +350,7 @@ compo = {
 			+'            </div>'
 			+'            <hr class="mb-4">'
 
-			+'            <h4 class="mb-3">Payment</h4>'
+			+'            <h4 class="mb-3">공급업체</h4>'
 
 			+'            <div class="d-block my-3">'
 			+'              <div class="custom-control custom-radio">'
@@ -421,6 +405,55 @@ compo = {
 			+'        </div>'
 		},
 		
+		
+		prod_post_aa :()=>{
+			return '<div class="form-group">'
+			+'  <label for="productName">상품명 :</label>'
+			+'  <input type="text" class="form-control" id="productName" name="productName">'
+			+'</div>'
+			+'<div class="form-group">'
+			+'  <label for="price">가격:</label>'
+			+'  <input type="text" class="form-control" id="price" name="price">'
+			+'</div>'
+			+'<h3> 색상 </h3>'
+			+'<div class="checkbox">'
+			+'  <label><input type="checkbox" value="">블랙</label>'
+			+'</div>'
+			+'<div class="checkbox">'
+			+'  <label><input type="checkbox" value="">화이트</label>'
+			+'</div>'
+			+'<div class="checkbox disabled">'
+			+'  <label><input type="checkbox" value="" disabled>블루</label>'
+			+'</div>'
+
+			+'<div class="radio">'
+			+'  <label><input type="radio" name="supplierID" checked>삼성전자</label>'
+			+'</div>'
+			+'<div class="radio">'
+			+'  <label><input type="radio" name="optradio">Option 2</label>'
+			+'</div>'
+			+'<div class="radio disabled">'
+			+'  <label><input type="radio" name="optradio" disabled>Option 3</label>'
+			+'</div>'
+
+			+'<div class="form-group">'
+			+'  <label for="sel1">카테고리:</label>'
+			+'  <select class="form-control" id="sel1">'
+			+'    <option>1</option>'
+			+'    <option>2</option>'
+			+'    <option>3</option>'
+			+'    <option>4</option>'
+			+'  </select>'
+			+'</div>'
+
+			+'<p>생산년월일: <input type="text" id="datepicker"></p>'
+
+			+'<div class="form-group">'
+			+'  <label for="comment">상세설명:</label>'
+			+'  <textarea class="form-control" rows="5" id="comment"></textarea>'
+			+'</div>';
+			
+		},
 		
 		//https://www.w3schools.com/bootstrap/bootstrap_forms_inputs.asp
 		//https://jqueryui.com/datepicker/
@@ -491,5 +524,27 @@ compo = {
 			+'    </tbody>'
 			+'  </table>'
 			+'</div>'
+		},
+		prod_list : ()=>{
+			return '<div id="prolist" class="container">'
+			+'  <h2>상품 리스트 </h2>'
+			+'  <table class="table table-striped">'
+			+'    <thead>'
+			+'      <tr>'
+			+'        <th>no</th>'
+			+'        <th>ID</th>'
+			+'        <th>상품명</th>'
+			+'        <th>공급자명</th>'
+			+'        <th>카테고리명</th>'
+			+'        <th>유닛</th>'
+			+'        <th>가격</th>'
+			+'      </tr>'
+			+'    </thead>'
+			+'    <tbody id="prodcontent">'
+			+'    </tbody>'
+			+'  </table>'
+			+'</div>'
 		}
+		
+		
 }

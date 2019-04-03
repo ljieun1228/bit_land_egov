@@ -57,14 +57,22 @@ public class CustController {
 	@GetMapping("/customers/page/{page}")
 	public Map<?,?> list(@PathVariable String page) {
 		logger.info("Welcome home! CustController=list");
+
 		map.clear();
-		map.put("page_num", "1");
+		map.put("page_num", page);
 		map.put("page_size", "5");
 		map.put("block_Size", "5");
-		map.put("total_count", "10");
+		ISupplier sup = () -> custMap.countAllCustomers();
+		map.put("total_count", sup.get());
+		
 		pxy.carryOut(map);
+		
+		ps.accept("시작값: "+pxy.getStartRow());
+		ps.accept("마지막값: "+pxy.getEndRow());
+		
 		IFunction  i = (Object o) ->  custMap.selectCustomers(pxy);
 		List<?> ls = (List<?>) i.apply(pxy);
+		
 		ps.accept("리스트"+ls);
 		map.clear();
 		map.put("ls", ls);

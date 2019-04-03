@@ -19,67 +19,7 @@ pro =(()=>{
 		$(compo.cust_carousel())
 		.appendTo(r_cnt);
 	};	
-	//cust_carousel
-	//cust_mypage
-	/*let post=()=>{
-		//1. Create(Insert : POST)  
-		$.ajax({
-			url:_+'/products',
-			type:'POST',
-			data: JSON.stringify(data),
-			dataType: 'json',
-			contentType:'application/json',
-				
-			success: d=>{
-				
-				
-			},
-			error: e=>{}
-		});
-		
-	};
 	
-	let get=()=>{
-		//2. Read(Select : GET)
-		$.ajax({
-			url:_+'/products',
-			type:'GET',
-			data: JSON.stringify(data),
-			dataType: 'json',
-			contentType:'application/json',
-				
-			success: d=>{},
-			error: e=>{}
-		});
-	};	
-	
-	let put=()=>{
-		//3. Update(PUT)
-		$.ajax({
-			url:_+'/products',
-			type:'PUT',
-			data: JSON.stringify(data),
-			dataType: 'json',
-			contentType:'application/json',
-				
-			success: d=>{},
-			error: e=>{}
-		});
-	};
-	
-	let del =()=>{
-		//4. Delete(DELETE)
-		$.ajax({
-			url:_+'/products',
-			type:'DELETE',
-			data: JSON.stringify(data),
-			dataType: 'json',
-			contentType:'application/json',
-				
-			success: d=>{},
-			error: e=>{}
-		});
-	};		*/
 
 	return {init:init}; 
 })();

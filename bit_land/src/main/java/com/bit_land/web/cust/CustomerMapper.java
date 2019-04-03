@@ -13,12 +13,14 @@ public interface CustomerMapper {
 	public void insertCustomer(Customer cus);
 	
 	public List<Customer> selectCustomerList(Proxy pxy);
-	public List<Customer> selectCustomers(Proxy pxy);
+	public List<?> selectCustomers(Proxy pxy);
 	public Customer selectCustomer(Customer cus);
 	public Customer selectCustomerOne(Customer cus);
 	public Map<String, Object> selectProfile(Map<?,?> m);
 
 	public int countCustomer(Map<?,?> m);
+	
+	public int countAllCustomers();
 	
 	public void updateCustomer(Customer cus);
 	

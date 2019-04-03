@@ -47,16 +47,73 @@ emp =(()=>{
 				switch(that){
 				case 'proRegist' :
 					$('#right_content').empty();
-					$(compo.prod_post()).appendTo('#right_content')
+					$(compo.prod_post_aa()).appendTo('#right_content')
 					.css({
 					    'background-color': '#f1f1f1'
 					});
+				case 'proList' :
+					$('#right_content').empty();
+						emp.prodList(1);
 				}
 			})
 		});
 	};
+	let prodList =x=>{
+		
+		$.getJSON($.ctx()+'/product/page/'+x, d=>{
+
+			$('#right_content').html(compo.prod_list());
+		
+			$.each(d.ls,(i,j)=>{
+				$('#prodcontent').append('<tr>'
+						+'<td>'+j.rownum+'</td>'
+						+'<td>'+j.productId+'</td>'
+						+'<td>'+j.productName+'</td>'
+						+'<td>'+j.supplierId+'</td>'
+						+'<td>'+j.categoryId+'</td>'
+						+'<td>'+j.unit+'</td>'
+						+'<td>'+j.price+'</td>'
+						+'</tr>');
+			});
+			$('#prolist').append('<ul id="pagi" class="pagination">');
+					
+			if(d.pxy.existPrev){
+				$('<li><a>&laquo;</a></li>')
+				.appendTo('#pagi')
+				.click(function(){
+					prodList(d.pxy.prevBlock);
+				 });
+			}
+			let i = 0;
+			for(i=d.pxy.startPage; i<d.pxy.endPage; i++){
+				if(d.pxy.pageNum == i){
+					$('<li><a class="page active">'+i+'</a></li>')
+					.appendTo('#pagi')
+					.attr('href',$.ctx()+'/product/page/'+i)
+					.click(function(){
+						prodList($(this).text());
+					 });
+					}else{
+					$('<li><a class="page">'+i+'</a></li>')
+					.appendTo('#pagi')	
+					.attr('href',$.ctx()+'/product/page/'+i)
+					.click(function(){
+						prodList($(this).text());
+					 });
+				};
+			};
+			if(d.pxy.existNext){
+				$('<li><a>&raquo;</a></li>')
+				.appendTo('#pagi')
+				.click(function(){
+					prodList(d.pxy.nextBlock);
+				 });
+			}
+			$('#prolist').append('</ul>');
+		});
+	};
 	
-	return {init:init, empNavi:empNavi};
+	return {init:init, empNavi:empNavi, prodList:prodList};
 })();
 
 

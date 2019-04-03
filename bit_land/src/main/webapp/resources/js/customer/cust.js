@@ -72,10 +72,10 @@ cust =(()=>{
 		})
 	};
 	
-	let list =()=>{
+	let list =x=>{
 	
-		$.getJSON($.ctx()+'/customers/page/1',d=>{
-			
+		$.getJSON($.ctx()+'/customers/page/'+x, d=>{
+
 			$('#right_content').html(compo.cust_list());
 		
 			$.each(d.ls,(i,j)=>{
@@ -90,30 +90,43 @@ cust =(()=>{
 						+'<td>'+j.phone+'</td>'
 						+'</tr>');
 			});
-			
-			html = '<div class="pagination">';
-			
-			
+			$('#cuslist').append('<ul id="pagi" class="pagination">');
+					
 			if(d.pxy.existPrev){
-				html += '<li><a href="${ctx}/customer.do?cmd=cust_list&page=list&page_num=${d.pxy.prevBlock}">&laquo;</a></li>';
+				$('<li><a>&laquo;</a></li>')
+				.appendTo('#pagi')
+				.click(function(){
+					list(d.pxy.prevBlock);
+				 });
 			}
 			let i = 0;
-			for(i=1;i<6;i++){
+			for(i=d.pxy.startPage; i<=d.pxy.endPage; i++){
 				if(d.pxy.pageNum == i){
-					html += '<li><a href="#" class="page active">'+i+'</a></li>';
-				}else{
-					html += '<li><a href="#" class="page">'+i+'</a></li>';
-				}
-			}
+					$('<li><a class="page active">'+i+'</a></li>')
+					.appendTo('#pagi')
+					.attr('href',$.ctx()+'/customers/page/'+i)
+					.click(function(){
+						list($(this).text());
+					 });
+					}else{
+					$('<li><a class="page">'+i+'</a></li>')
+					.appendTo('#pagi')	
+					.attr('href',$.ctx()+'/customers/page/'+i)
+					.click(function(){
+						list($(this).text());
+					 });
+				};
+			};
 			if(d.pxy.existNext){
-				html += '<li><a href="${ctx}/customer.do?cmd=cust_list&page=list&page_num=${d.pxy.nextBlock}" >&raquo;</a></li>';
+				$('<li><a>&raquo;</a></li>')
+				.appendTo('#pagi')
+				.click(function(){
+					list(d.pxy.nextBlock);
+				 });
 			}
-			$('#cuslist').append(html);
+			$('#cuslist').append('</ul>');
 		});
-		
-		
 	};
-				
 	return {init:init, list:list};
 })();
 

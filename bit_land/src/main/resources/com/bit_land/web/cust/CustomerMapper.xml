@@ -18,7 +18,7 @@
   <result property="rownum" column="ROWNUM"/>
 </resultMap>
 
- <select 
+ 	<select 
 		id="selectCustomer" 
 		resultMap="result">
 		SELECT C.*
@@ -37,6 +37,10 @@
 	    FROM CUSTOMERS C, (SELECT @ROWNUM:=0)TMP
 	    ORDER BY ROWNUM DESC
 	    LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="countAllCustomers" resultType="int">
+		SELECT COUNT(*) FROM CUSTOMERS 
 	</select>
 		
 	<insert

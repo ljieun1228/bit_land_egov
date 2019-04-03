@@ -8,6 +8,6 @@ import lombok.Data;
 @Data @Component @Lazy
 public class Product {
 
-	private String rnum, productId, productName, supplierId, categoryId, unit, price;
+	private String rownum, productId, productName, supplierId, categoryId, unit, price;
 
 }

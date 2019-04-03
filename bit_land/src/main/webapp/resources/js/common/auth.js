@@ -273,7 +273,7 @@ auth =(()=>{
 						e.preventDefault();
 						if(data.name === d.name){ // 고객 명단
 							$.getScript(custjs,()=>{
-								cust.list();
+								cust.list(1);
 								emp.empNavi();
 								
 							});
