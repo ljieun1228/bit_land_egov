@@ -2,8 +2,7 @@
 
 var pro = pro ||{}
 pro =(()=>{
-	let _,js,
-	compojs,custjs,prdjs,r_cnt, l_cnt;
+	let _,js,compojs,custjs,prdjs,r_cnt, l_cnt;
 	
 	let init =()=>{
 		_ = $.ctx();
@@ -94,7 +93,7 @@ pro =(()=>{
 	$().html(compo.prod_post_aa());
 	$('#prd_post_btn').click(function(e){
 		e.preventDefault();
-		
+
 		alert("#prd_post_btn 클릭~");
 		let freebies = [];
 
@@ -140,7 +139,39 @@ pro =(()=>{
 			}
 		})
 	});
+	
+	$('#img_upload_btn').click(function(){
+		alert("업로드 버튼 클릭");
+		e.preventDefault();
+		
+		let ok = (this.files[0].name.match(/jpg|gif|png|jpg/i))?true:false;
+		if(ok){
+			
+		/*	let fd = new formData();
+			fd.append('form',this.files[0]);
+			*/
+			$('#img_upload').attr('action',$.ctx()+'/products/file');
+			$.ajax({
+				url :$('#img_upload').attr('action'),//게터처럼
+				type : 'text',
+				enctype : "multipart/form-data",
+				beforeSubmit : function(){
+					alert('로딩');
+				},
+				success : d =>{
+					alert("파일 업로드 성공");
+				},
+				error : e =>{
+					alert("파일 업로드 실패");
+				}
+			}).submit();
+		}else{
+			alert('파일 형식이 올바르지 않습니다.');
+		};
+	});
 }	
+	
+	
 
 	return {init:init
 		,prodList:prodList

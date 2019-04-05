@@ -75,45 +75,42 @@ cust =(()=>{
 			     }
 			});	
 		})
-		//은영언니 => 로그인 한뒤에 검색버튼이 나오게 해줫여오
-		$('#serch_de')
+		$('#search_de')
         .append('<div class="input-group">'
-                +'<input id="serch_input" type="text" class="form-control" placeholder="상품 검색..">'
+                +'<input id="search_input" type="text" class="form-control" placeholder="상품 검색..">'
                 +'  <span class="input-group-btn">'
-                +'  <button id="serch_btn" class="btn btn-default" type="button">'
+                +'  <button id="search_btn" class="btn btn-default" type="button">'
                 +'    <span class="glyphicon glyphicon-search"></span>'
                 +'  </button>'
                 +' </span>'
                 +'  </div>');
-		
-	
-		//은영언니 => 클릭하면 데이터가 넘어가게 해줬어여
-		$('#serch_btn').on('click',()=>{
+			
+		$('#search_btn').on('click',()=>{
 			
 			let data ={page: '1' , keyword:$("#serch_input").val()};
 			
 			alert("넘어온 데이터 ::"+data.keyword);
-			serchCheck(data);
+
+			if($.fn.nullChecker(data.keyword)){
+				 alert('검색어를 입력해주세요.');
+			 }else{
+				 alert('널이 아닙니다.');
+					searchCheck(data);
+			 }
 		});
 		
 	};
 	
-	//은영언니 
 	//상품 검색 체크 
-	let serchCheck =(x)=>{
+	let searchCheck =(x)=>{
 			
 			alert("검색을 시작합니다.");
-			//널체크
-			 if($.fn.nullChecker(x)){
-				 alert('검색어를 입력해주세요.');
-			 }else{
-				 alert('널이 아닙니다.');
-				 
+			
+			
 				 $.getJSON($.ctx()+'/products/'+x.page+'/'+x.keyword, d=>{
-				//제이슨으로 보내주고 성공한 뒤 보여줄 결과가 아래임 	
 					 alert('성공');
 
-					 $('#right_content').html(compo.prod_serch_list());
+					 $('#right_content').html(compo.prod_search_list());
 						
 						$.each(d.ls,(i,j)=>{
 							$('#prodcontent').append('<tr>'
@@ -127,12 +124,11 @@ cust =(()=>{
 						});
 						$('#prolist').append('<ul id="pagi" class="pagination">');
 						
-						//여기부터 페이지네이션 버튼		
 						if(d.pxy.existPrev){
 							$('<li><a>&laquo;</a></li>')
 							.appendTo('#pagi')
 							.click(function(){
-								serchCheck(d.pxy.prevBlock);//재귀호출 서치체크로
+								searchCheck(d.pxy.prevBlock);
 							 });
 						}
 						let i = 0;
@@ -143,7 +139,7 @@ cust =(()=>{
 								.attr('href',$.ctx()+'/product/page/'+i)
 								.click(function(){
 									let data1 ={page: $(this).text(), keyword:x.keyword};
-									serchCheck(data1);//재귀호출 서치체크로
+									searchCheck(data1);
 								 });
 								}else{
 								$('<li><a class="page">'+i+'</a></li>')
@@ -151,7 +147,7 @@ cust =(()=>{
 								.attr('href',$.ctx()+'/product/page/'+i)
 								.click(function(){
 									let data2 ={page: $(this).text(), keyword:x.keyword};
-									serchCheck(data2);//재귀호출 서치체크로
+									searchCheck(data2);
 								 });
 							};
 						};
@@ -159,21 +155,50 @@ cust =(()=>{
 							$('<li><a>&raquo;</a></li>')
 							.appendTo('#pagi')
 							.click(function(){
-								serchCheck(d.pxy.nextBlock);
+								searchCheck(d.pxy.nextBlock);
 							 });
-						}
+						};
 						$('#prolist').append('</ul>');
-					 
-				 })
-			 }
-		}	
+
+						$('#grid_btn').click(function(e){
+							e.preventDefault();
+							alert('그리드클릭');
+							
+							
+							
+							let url = $.ctx()+'/products/'+x.page+'/grid/'+x.keyword;
+							
+							$.getJSON(url,d=>{
+								
+						        alert('그리드 클릭 겟제이슨 성공');
+						        
+								let i = 0;
+								  $('<div id="grid" />').appendTo('#content_2');
+									
+									 $.each(d.ls,(x,y)=>{
+									 $('<div class="col-md-4">'
+						                      +'<div class="thumbnail">'
+						                        +'<a href="#" target="_blank">'
+						                          +'<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRanydDprvV35nlbHP2RwvjdyPrYgOgjevy7W_efJ2tTEVZvKKF" alt="Lights" style="width:100%">'
+						                          +'<div class="caption">'
+						                            +'<p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>'
+						                          +'</div>'
+						                        +'</a>'
+						                      +'</div>').appendTo('#grid')
+						        }); 
+						});
+							//('#grid_btn').text('리스트 보기');
+					});
+				 });
+			 };
+		
 	
 	let list =x=>{
 	
 		$.getJSON($.ctx()+'/customers/page/'+x, d=>{
 
 			$('#right_content').html(compo.cust_list());
-		
+			
 			$.each(d.ls,(i,j)=>{
 				$('#custcontent').append('<tr>'
 						+'<td>'+j.rownum+'</td>'
@@ -219,10 +244,12 @@ cust =(()=>{
 				.click(function(){
 					list(d.pxy.nextBlock);
 				 });
-			}
+			};
 			$('#cuslist').append('</ul>');
+			
 		});
 	};
+	
 	return {init:init, list:list};
 })();
 

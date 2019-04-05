@@ -1,7 +1,10 @@
 package com.bit_land.web.prod;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.bit_land.web.cate.Category;
 import com.bit_land.web.cate.CategoryMapper;
@@ -39,7 +46,7 @@ public class ProductController {
 	@Autowired	Map<String, Object> map;
 	@Autowired  Proxy pxy;
 	@Autowired	PrintService ps;
-	
+	@Resource(name="uploadPath") private String uploadPath;
 	
 	//Insert//
 		@Transactional //a-c에 트랜젝션 설정후 사용 (금융거래 등)
@@ -80,12 +87,12 @@ public class ProductController {
 		}
 		
 		
-	//serch  //은영언니
+	//search  
 		@GetMapping("/products/{page}/{keyword}")
-		public Map<?,?> serch(
+		public Map<?,?> search(
 				@PathVariable("page") String page,
 				@PathVariable String keyword) {
-			logger.info("Welcome home! productsController=serch");
+			logger.info("Welcome home! productsController=search");
 
 			map.clear();
 			map.put("page_num", page);
@@ -97,21 +104,19 @@ public class ProductController {
 			logger.info("key>>"+key);
 			
 			map.put("keyword", key);
-			
-			int a = 5;
-			
-			ISupplier supp = () -> proMap.countserchProducts(key);
+				
+			ISupplier supp = () -> proMap.countsearchProducts(key);
 			
 			map.put("total_count",supp.get());
 
 			logger.info("total_count"+supp.get());
 			
 			pxy.carryOut(map);
-			System.out.println(pxy.getKey());
-			IFunction i = (Object o) -> proMap.serchProducts((Proxy) o);
+			
+			IFunction i = (Object o) -> proMap.searchProducts((Proxy) o);
 			@SuppressWarnings("unchecked")
 			List<Product> ls = (List<Product>) i.apply(pxy);
-			System.out.println(ls.toString());
+			
 			map.clear();
 			map.put("ls", ls);
 			map.put("pxy", pxy);
@@ -119,6 +124,42 @@ public class ProductController {
 			return  map;
 		}
 		
+		//그리드search  
+		@GetMapping("/products/{page}/grid/{keyword}")
+		public Map<?,?> grid(
+				@PathVariable("page") String page,
+				@PathVariable String keyword) {
+			logger.info("Welcome home! productsController=grid");
+
+			map.clear();
+			map.put("page_num", page);
+			map.put("page_size", "9");
+			map.put("block_size", "5");
+			
+			String key = '%'+keyword+'%';
+			
+			logger.info("key>>"+key);
+			
+			map.put("keyword", key);
+				
+			ISupplier supp = () -> proMap.countsearchProducts(key);
+			
+			map.put("total_count",supp.get());
+
+			logger.info("total_count"+supp.get());
+			
+			pxy.carryOut(map);
+			
+			IFunction i = (Object o) -> proMap.searchProducts((Proxy) o);
+			@SuppressWarnings("unchecked")
+			List<Product> ls = (List<Product>) i.apply(pxy);
+			
+			map.clear();
+			map.put("ls", ls);
+			map.put("pxy", pxy);
+			
+			return  map;
+		}
 	
 	//상품 리스트
 		@GetMapping("/products/page/{page}")
@@ -129,7 +170,7 @@ public class ProductController {
 			map.put("page_num", page);
 			map.put("page_size", "5");
 			map.put("block_Size", "5");
-			ISupplier sup = () -> proMap.countProduct();
+			ISupplier sup = () -> proMap.countsearchProducts();
 			map.put("total_count", sup.get());
 			
 			pxy.carryOut(map);
@@ -147,8 +188,19 @@ public class ProductController {
 			return map;
 		}	
 		
-		
-		
+		//파일 업로드
+		@RequestMapping(value="/products/file",method=RequestMethod.POST)
+		public Map<?,?> fileUpLoad(MultipartHttpServletRequest req)throws Exception{
+			Iterator<String> it = req.getFileNames();
+			if(it.hasNext()){
+				MultipartFile mf = req.getFile(it.next());
+				
+				ps.accept("넘어온파일명"+mf.getName());
+			}
+			ps.accept("파일 저장경로 "+ uploadPath);
+			
+			return map;
+		}
 		
 	// Update(PUT)
 		

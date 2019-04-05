@@ -411,7 +411,7 @@ compo = {
 		prod_post_aa :()=>{
 			return '<div class="col-md-8 order-md-1">'
 	          +'<h4 class="mb-3">상품 등록</h4>'
-	          +'<form class="needs-validation" novalidate="">'
+	          +'<div class="needs-validation" novalidate="">'
 	          +'<div class="row">'
             +'<div class="col-md-5 mb-3">'
               +'<label for="country">카테고리</label>'
@@ -455,7 +455,6 @@ compo = {
 	                +'</select>'
 	              +'</div>'
 	            +'</div>'
-	              
 	            +'<hr class="mb-4">'
               +'<div class="invalid-feedback">'
               +'사은품 선택 (두개)'
@@ -472,8 +471,6 @@ compo = {
 	              +'<input type="checkbox" class="checks custom-control-input" value="case" id="same-address">'
 	            +'  <label class="custom-control-label" for="same-address">휴대폰케이스</label>'
 	            +'</div>'
-	            
-	            
 	            +'<hr class="mb-4">'
 	            +'<h4 class="mb-3">색상을 선택해 주세요.</h4>'
 	            +'<div class="d-block my-3">'
@@ -490,8 +487,6 @@ compo = {
 	                +'<label class="radi custom-control-label" for="paypal">블루</label>'
 	              +'</div>'
 	            +'</div>'
-	            
-	            
 	            +'<hr class="mb-4">'
 	            +'<div class="row">'
 	              +'<div class="col-md-6 mb-3">'
@@ -509,21 +504,27 @@ compo = {
 	            +'<hr class="mb-4">'
 	            +'<div class="row">'
 	              +'<div class="col-md-5 mb-5">'
+	              +'<form id="img_upload" encType="multipart/form-data">'
 	                +'<label for="cc-expiration">이미지 등록(파일 업로드)</label>'
 	                +'<input type="file" class="form-control" id="cc-expiration" placeholder="" required="">'
 	                +'<div class="invalid-feedback">'
+	                +'<input type="submit" id="img_upload_btn">'
+	                	
+	                +'</form>'
 	                +'</div>'
 	              +'</div>'
 	              +'<div class="col-md-5 mb-5">'
-	                +'<label for="cc-cvv">이미지 등록(드레그&드랍)</label>'
+	              +'<form id="img_drag">'
+	              +'<label for="cc-cvv">이미지 등록(드레그&드랍)</label>'
 	                +'<input type="file" class="form-control" id="cc-cvv" placeholder="" required="">'
 	                +'<div class="invalid-feedback">'
+	                +'</form>'
 	                +'</div>'
 	              +'</div>'
 	            +'</div>'
 	            +'<hr class="mb-4">'
 	            +'<button id="prd_post_btn" class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>'
-	          +'</form>'
+	          +'</div>'
 	        +'</div>';
 		},
 		
@@ -598,7 +599,7 @@ compo = {
 			+'  </table>'
 			+'</div>'
 		},
-		prod_list : ()=>{//은영언니
+		prod_list : ()=>{
 			return '<div id="prolist" class="container">'
 			+'  <h2>상품 리스트 </h2>'
 			+'  <table class="table table-striped">'
@@ -618,9 +619,10 @@ compo = {
 			+'  </table>'
 			+'</div>'
 		},
-		prod_serch_list : ()=>{//은영언니
+		prod_search_list : ()=>{
 			return '<div id="prolist" class="container">'
 			+'  <h2>검색 결과 </h2>'
+			+'  <button id="grid_btn">그리드로 보기</button>'
 			+'  <table class="table table-striped">'
 			+'    <thead>'
 			+'      <tr>'
@@ -635,6 +637,8 @@ compo = {
 			+'    </tbody>'
 			+'  </table>'
 			+'</div>'
+			
+			
 		}
 		
 		

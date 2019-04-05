@@ -12,17 +12,17 @@ public interface ProductMapper {
 
 	public void insertProduct(Product product);
 	
-	public List<Product> selectProductList(Proxy pxy);//
+	public List<?> selectProductList(Proxy pxy);//
 	
 	public List<Product> selectProducts(Product product);
-	public List<Product> serchProducts(Proxy pxy);
+	public List<?> searchProducts(Proxy pxy);
 
 	public Product selectProduct(Product product);
 	public Product selectProductOne(Product product);
 	
 	public Map<String, Object> selectProfile(Map<?,?> m);
 	
-	public int countProduct();//
+	public int countsearchProducts();//
 	
 	public boolean existsProductID(Product product);
 
@@ -30,7 +30,7 @@ public interface ProductMapper {
 	
 	public void deleteProduct(Product product);
 
-	public int countserchProducts(String key);
+	public int countsearchProducts(String key);
 	
 	
 }

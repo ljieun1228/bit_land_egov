@@ -54,7 +54,7 @@
         <li><a href="#section3">Family</a></li>
         <li><a href="#section3">Photos</a></li>
       </ul><br>
-    <div id="serch_de" class="serch">
+    <div id="search_de" class="search">
      </div>
     </div> <!-- left_content -->
 
@@ -133,6 +133,8 @@
 <script src="<%=application.getContextPath()%>/resources/js/common/auth.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/product/pro.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/common/util.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/product/fileupload.js"></script>
+
 <script>
 app.init('<%=application.getContextPath()%>');
 </script>	
