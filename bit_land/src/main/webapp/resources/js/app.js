@@ -1,3 +1,5 @@
+"use strict";
+
 var app = app ||{};
 app =(()=>{
      var init =(x)=>{

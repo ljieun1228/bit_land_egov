@@ -10,14 +10,15 @@ import lombok.Data;
 public class Proxy {
 	private int pageNum, pageSize, blockSize, startRow, 
 		endRow, startPage, endPage, prevBlock, nextBlock, totalCount;
-
+	private String key;//은영언니
     private boolean existPrev, existNext;
 
     public void carryOut(Map<?,?> paramMap) {
 
         // page_num, page_size, block_Size, total_count
-
-
+    	
+    	key = (String) paramMap.get("keyword");//키를 여기에 한번 담아주고 간다. 
+    	
         String _pageNum = (String) paramMap.get("page_num");
         pageNum = ((String) paramMap.get("page_num") == null) ? 1 : Integer.parseInt(_pageNum);
         System.out.println("페이지네이션 페이지넘" + pageNum);

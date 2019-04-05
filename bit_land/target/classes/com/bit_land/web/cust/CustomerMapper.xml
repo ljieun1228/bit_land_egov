@@ -18,9 +18,7 @@
   <result property="rownum" column="ROWNUM"/>
 </resultMap>
 
- 	<select 
-		id="selectCustomer" 
-		resultMap="result">
+ 	<select id="selectCustomer" resultType="com.bit_land.web.cust.Customer">
 		SELECT C.*
 		FROM CUSTOMERS C
 	 	WHERE CUST_ID LIKE #{customerId}

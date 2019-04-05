@@ -1,20 +1,30 @@
+"use strict";
+
 var emp = emp || {};
 
 emp =(()=>{
 	let init =()=>{
-		onCreat();
+		_ = $.ctx();
+		js = $.js();
+		compojs = js+'/cmp/compo.js';
+		custjs = js+'/cst/cust.js';
+		prdjs = js+'/prd/prd.js';
+		r_cnt = '#right_content';
+		l_cnt = '#left_content';
 		
 	};
 	let onCreat =()=>{
 		$.when(
-				
+			$.getScript(custjs),
+			$.getScript(compojs),
+			$.getScript(prdjs)
 		)
 		.done(()=>{
 			setContentView();
-			
+			$('#serch_btn').on('click',()=>{
+				alert('테스트');
+			});
 		});
-
-		
 	};
 	let setContentView =()=>{
 		
@@ -38,6 +48,7 @@ emp =(()=>{
 			.attr('id',j.name)
 			.appendTo('#left_content'+' ul')
 			
+			
 			.click(function(e){
 				e.preventDefault();
 				let that = $(this).attr('name')
@@ -51,69 +62,22 @@ emp =(()=>{
 					.css({
 					    'background-color': '#f1f1f1'
 					});
+					pro.prodCheck();
+					break;	
+					
 				case 'proList' :
 					$('#right_content').empty();
-						emp.prodList(1);
+						pro.prodList(1);
+						break;
 				}
 			})
 		});
-	};
-	let prodList =x=>{
-		
-		$.getJSON($.ctx()+'/product/page/'+x, d=>{
 
-			$('#right_content').html(compo.prod_list());
 		
-			$.each(d.ls,(i,j)=>{
-				$('#prodcontent').append('<tr>'
-						+'<td>'+j.rownum+'</td>'
-						+'<td>'+j.productId+'</td>'
-						+'<td>'+j.productName+'</td>'
-						+'<td>'+j.supplierId+'</td>'
-						+'<td>'+j.categoryId+'</td>'
-						+'<td>'+j.unit+'</td>'
-						+'<td>'+j.price+'</td>'
-						+'</tr>');
-			});
-			$('#prolist').append('<ul id="pagi" class="pagination">');
-					
-			if(d.pxy.existPrev){
-				$('<li><a>&laquo;</a></li>')
-				.appendTo('#pagi')
-				.click(function(){
-					prodList(d.pxy.prevBlock);
-				 });
-			}
-			let i = 0;
-			for(i=d.pxy.startPage; i<d.pxy.endPage; i++){
-				if(d.pxy.pageNum == i){
-					$('<li><a class="page active">'+i+'</a></li>')
-					.appendTo('#pagi')
-					.attr('href',$.ctx()+'/product/page/'+i)
-					.click(function(){
-						prodList($(this).text());
-					 });
-					}else{
-					$('<li><a class="page">'+i+'</a></li>')
-					.appendTo('#pagi')	
-					.attr('href',$.ctx()+'/product/page/'+i)
-					.click(function(){
-						prodList($(this).text());
-					 });
-				};
-			};
-			if(d.pxy.existNext){
-				$('<li><a>&raquo;</a></li>')
-				.appendTo('#pagi')
-				.click(function(){
-					prodList(d.pxy.nextBlock);
-				 });
-			}
-			$('#prolist').append('</ul>');
-		});
 	};
 	
-	return {init:init, empNavi:empNavi, prodList:prodList};
+	
+	return {init:init, empNavi:empNavi};
 })();
 
 

@@ -29,5 +29,41 @@
 	 <select id="countProduct" resultType="int">
 		SELECT COUNT(*) FROM PRODUCTS 
 	</select>   
+	
+	
+	<!-- //은영언니 -->
+	 <select id="countserchProducts" resultType="int"
+	 parameterType="com.bit_land.web.cmm.Proxy">
+	 
+	SELECT COUNT(*)
+	FROM PRODUCTS P JOIN SUPPLIERS S ON P.SUPPLIER_ID LIKE S.SUPPLIER_ID
+	WHERE P.PRODUCT_NAME LIKE #{key} 
+	OR S.SUPPLIER_NAME LIKE #{key} 
+	OR S.ADDRESS LIKE #{key}
+	OR S.CITY LIKE #{key}
+
+	</select>  
+	
+	
+	<!-- //은영언니 -->
+	 <select id="serchProducts" resultType="com.bit_land.web.prod.Product" 
+	 parameterType="com.bit_land.web.cmm.Proxy">
+	
+		SELECT @ROWNUM:=@ROWNUM+1 AS ROWNUM,
+		 P.PRODUCT_NAME productName
+			,S.SUPPLIER_NAME supplierId,
+			P.UNIT,
+			P.PRICE
+		FROM PRODUCTS P 
+		JOIN SUPPLIERS S ON P.SUPPLIER_ID LIKE S.SUPPLIER_ID ,(SELECT @ROWNUM:=0)TMP
+		WHERE P.PRODUCT_NAME LIKE #{key} 
+		OR S.SUPPLIER_NAME LIKE #{key} 
+		OR S.ADDRESS LIKE #{key}
+		OR S.CITY LIKE #{key}
+		ORDER BY ROWNUM DESC                    
+		LIMIT #{startRow}, #{pageSize}                   
+		 
+		 
+	</select>  
 	    
 </mapper>

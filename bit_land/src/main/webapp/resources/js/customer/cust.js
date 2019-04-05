@@ -1,15 +1,20 @@
+"use strict";
+
 var cust = cust || {}
 
 cust =(()=>{
 	
 	
-	let js,projs,l_cnt,r_cnt;
+	let _,js,compojs,custjs,projs,r_cnt,l_cnt;
 		
 	let init =()=>{
-		l_cnt = '#left_content';
-		r_cnt = '#right_content';
+		_=$.ctx();
 		js=$.js();
 		projs = js +'/product/pro.js';
+		compojs = js +'/component/compo.js';
+		custjs = js +'/customer/cust.js';
+		r_cnt = '#right_content';
+		l_cnt = '#left_content';
 		onCreat();
 	};
 		
@@ -70,7 +75,98 @@ cust =(()=>{
 			     }
 			});	
 		})
+		//은영언니 => 로그인 한뒤에 검색버튼이 나오게 해줫여오
+		$('#serch_de')
+        .append('<div class="input-group">'
+                +'<input id="serch_input" type="text" class="form-control" placeholder="상품 검색..">'
+                +'  <span class="input-group-btn">'
+                +'  <button id="serch_btn" class="btn btn-default" type="button">'
+                +'    <span class="glyphicon glyphicon-search"></span>'
+                +'  </button>'
+                +' </span>'
+                +'  </div>');
+		
+	
+		//은영언니 => 클릭하면 데이터가 넘어가게 해줬어여
+		$('#serch_btn').on('click',()=>{
+			
+			let data ={page: '1' , keyword:$("#serch_input").val()};
+			
+			alert("넘어온 데이터 ::"+data.keyword);
+			serchCheck(data);
+		});
+		
 	};
+	
+	//은영언니 
+	//상품 검색 체크 
+	let serchCheck =(x)=>{
+			
+			alert("검색을 시작합니다.");
+			//널체크
+			 if($.fn.nullChecker(x)){
+				 alert('검색어를 입력해주세요.');
+			 }else{
+				 alert('널이 아닙니다.');
+				 
+				 $.getJSON($.ctx()+'/products/'+x.page+'/'+x.keyword, d=>{
+				//제이슨으로 보내주고 성공한 뒤 보여줄 결과가 아래임 	
+					 alert('성공');
+
+					 $('#right_content').html(compo.prod_serch_list());
+						
+						$.each(d.ls,(i,j)=>{
+							$('#prodcontent').append('<tr>'
+									+'<td>'+j.rownum+'</td>'
+									+'<td>'+j.productName+'</td>'
+									+'<td>'+j.supplierId+'</td>'
+									+'<td>'+j.unit+'</td>'
+									+'<td>'+j.price+'</td>'
+									+'</tr>');
+							
+						});
+						$('#prolist').append('<ul id="pagi" class="pagination">');
+						
+						//여기부터 페이지네이션 버튼		
+						if(d.pxy.existPrev){
+							$('<li><a>&laquo;</a></li>')
+							.appendTo('#pagi')
+							.click(function(){
+								serchCheck(d.pxy.prevBlock);//재귀호출 서치체크로
+							 });
+						}
+						let i = 0;
+						for(i=d.pxy.startPage; i<=d.pxy.endPage; i++){
+							if(d.pxy.pageNum == i){
+								$('<li><a class="page active">'+i+'</a></li>')
+							    .appendTo('#pagi')
+								.attr('href',$.ctx()+'/product/page/'+i)
+								.click(function(){
+									let data1 ={page: $(this).text(), keyword:x.keyword};
+									serchCheck(data1);//재귀호출 서치체크로
+								 });
+								}else{
+								$('<li><a class="page">'+i+'</a></li>')
+								.appendTo('#pagi')	
+								.attr('href',$.ctx()+'/product/page/'+i)
+								.click(function(){
+									let data2 ={page: $(this).text(), keyword:x.keyword};
+									serchCheck(data2);//재귀호출 서치체크로
+								 });
+							};
+						};
+						if(d.pxy.existNext){
+							$('<li><a>&raquo;</a></li>')
+							.appendTo('#pagi')
+							.click(function(){
+								serchCheck(d.pxy.nextBlock);
+							 });
+						}
+						$('#prolist').append('</ul>');
+					 
+				 })
+			 }
+		}	
 	
 	let list =x=>{
 	

@@ -54,14 +54,8 @@
         <li><a href="#section3">Family</a></li>
         <li><a href="#section3">Photos</a></li>
       </ul><br>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Blog..">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-        </span>
-      </div>
+    <div id="serch_de" class="serch">
+     </div>
     </div> <!-- left_content -->
 
     <div id="right_content" class="col-sm-9">
@@ -138,6 +132,7 @@
 <script src="<%=application.getContextPath()%>/resources/js/customer/cust.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/common/auth.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/product/pro.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/common/util.js"></script>
 <script>
 app.init('<%=application.getContextPath()%>');
 </script>	

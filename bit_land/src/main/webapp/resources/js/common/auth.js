@@ -1,8 +1,10 @@
+"use strict";
+
 var auth = auth || {}
 
 auth =(()=>{
 	
-	let _,js,compojs,r_cnt,l_cnt;
+	let _,js,compojs,custjs,r_cnt,l_cnt;
 	
 	let init =()=>{
 		_=$.ctx();
@@ -176,11 +178,10 @@ auth =(()=>{
 	
 	// 유저 로그인
 	let login =()=>{
-				$("form button[type=submit]").click( e=>{
-					e.preventDefault();
+				
 			let data ={customerId:$("form input[name=uname]").val(),
 					customerPw:$("form input[name=psw]").val()};
-			alert(data.customerId+"  .."+data.customerPw);
+			
 			
 			// 유저 로그인 ajax
 			$.ajax({
@@ -202,7 +203,7 @@ auth =(()=>{
 					},
 				error: e =>{alert('ajax 실패');}
 			});
-		});
+		
 	};		
 	
 	// 사원 가입

@@ -52,7 +52,8 @@ public class CustController {
 		map.put("msg", "SUCCESS");
 		return map;
 	}
-
+		
+	
 	//유저 리스트
 	@GetMapping("/customers/page/{page}")
 	public Map<?,?> list(@PathVariable String page) {

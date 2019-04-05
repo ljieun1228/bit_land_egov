@@ -15,6 +15,8 @@ public interface ProductMapper {
 	public List<Product> selectProductList(Proxy pxy);//
 	
 	public List<Product> selectProducts(Product product);
+	public List<Product> serchProducts(Proxy pxy);
+
 	public Product selectProduct(Product product);
 	public Product selectProductOne(Product product);
 	
@@ -27,6 +29,8 @@ public interface ProductMapper {
 	public void updateProduct(Product product);
 	
 	public void deleteProduct(Product product);
+
+	public int countserchProducts(String key);
 	
 	
 }
